@@ -1,0 +1,9 @@
+{
+  "baseUrl": "https://reqres.in",
+  "integrationFolder": "cypress/all-tests",
+  "projectId": "vqn4nq",
+  "defaultCommandTimeout": 10000,
+  "env": {
+    "iherbURL": "https://www.iherb.com"
+  }
+}
