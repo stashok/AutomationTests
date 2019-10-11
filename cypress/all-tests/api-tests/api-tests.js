@@ -11,7 +11,8 @@ describe('Test fors reqres', () => {
             description: "Max values",
             requestData: {
                 name: Chance().string({length: 100}),
-                job: Chance().string({length: 100})
+                job: Chance().string({length: 100}),
+
             }
         },
 
