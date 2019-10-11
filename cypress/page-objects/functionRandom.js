@@ -3,10 +3,9 @@ class RandomForTests {
      randomUrls(countOfUrls){
         let arr = [];
          for( let i = 0; i < countOfUrls; i++){
-             arr[i] = {
-                 name: Chance().string({length: 100}),
-                 wrapped: Chance().string({length: 100})
-             };
+             arr[i] = Chance().string();
+                // wrapped: Chance().string({length: 100})
+
          }
         return arr;
     }
