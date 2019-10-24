@@ -1,8 +1,10 @@
 import Chance from 'chance'
+import functionRandom from "../../../page-objects/functionRandom";
 import {createPet, deletePet, getPetById, updatePet} from "../../../service/petService"
 import {DATA_OPTIONS, getPetRequestData} from "../../../utils/requestsDataGenerator";
 import {API_URL} from "../../../service/apiSettings";
 import {PET_LIMIT} from "../../../utils/limits";
+
 
 
 describe('Tests for Create Pet endpoint', () => {
@@ -34,9 +36,46 @@ describe('Tests for Create Pet endpoint', () => {
             })
         })
     });
-    it('Negative: value + 1 name C23', () => {
+    it('Negative: Length of name field exceeds the max value C23', () => {
+        let dataSet=getPetRequestData(PET_LIMIT, true);
+        dataSet.name= Chance().string({length: PET_LIMIT.name.max + 1});
+        createPet(dataSet, false).then(response => {
+            expect(response.status).to.eq(400);
+            expect(response.messages[0].fieldName).to.eq(`${PET_LIMIT.name}`);
+            expect(response.messages[0].fieldError).to.eq(`Length must be between ${PET_LIMIT.name.min} and ${PET_LIMIT.name.max}`);
+        })
+    });
+
+    it('Negative: Length of category field exceeds the max value C24', () => {
+        let dataSet=getPetRequestData(PET_LIMIT, true);
+        dataSet.category.name = Chance().string({length: PET_LIMIT.category.name.max + 1});
+        createPet(dataSet, false).then(response => {
+            expect(response.status).to.eq(400);
+            expect(response.messages[0].fieldName).to.eq(`${PET_LIMIT.category.name}`);
+            expect(response.messages[0].fieldError).to.eq(`Length must be between ${PET_LIMIT.category.name.min} and ${PET_LIMIT.category.name.max}`);
+        })
+    });
+    it('Negative: Length of photoUrls field exceeds the max value C25', () => {
+        let dataSet=getPetRequestData(PET_LIMIT, true);
+        dataSet.photoUrls = functionRandom.randomUrls(PET_LIMIT.photoUrls.urlCount.max+1);
+        createPet(dataSet, false).then(response => {
+            expect(response.status).to.eq(400);
+            expect(response.messages[0].fieldName).to.eq(`${PET_LIMIT.photoUrls.urlCount}`);
+            expect(response.messages[0].fieldError).to.eq(`Length must be between ${PET_LIMIT.photoUrls.urlCount.min} and ${PET_LIMIT.photoUrls.urlCount.max}`);
+        })
+    });
+    it('Negative: Length of tags field exceeds the max value C26', () => {
+        let dataSet=getPetRequestData(PET_LIMIT, true);
+        dataSet.tags=functionRandom.randomTags(PET_LIMIT.tags.name.max+1)
+        createPet(dataSet, false).then(response => {
+            expect(response.status).to.eq(400);
+            expect(response.messages[0].fieldName).to.eq(`${PET_LIMIT.tags.name}`);
+            expect(response.messages[0].fieldError).to.eq(`Length must be between ${PET_LIMIT.tags.name.min} and ${PET_LIMIT.tags.name.max}`);
+        })
+    });
+   /* it('Negative: value + 1 name C23', () => {
         let dataSet = getPetRequestData(PET_LIMIT, true)
-        dataSet.name = PET_LIMIT.name.max + 1
+        dataSet.name = Chance().string({length:PET_LIMIT.name.max + 1})
         createPet(dataSet, false).then(response => {
             expect(response.status).to.eq(400)
             expect(response.body.message).to.eq("Length must be between min and max")
@@ -44,16 +83,7 @@ describe('Tests for Create Pet endpoint', () => {
 
         })
     });
-    it('Negative: value + 1 id', () => {
-        let dataSet = getPetRequestData(PET_LIMIT, true)
-        dataSet.id = PET_LIMIT.id.max + 1
-        createPet(dataSet, false).then(response => {
-            expect(response.status).to.eq(400)
-            expect(response.body.message).to.eq("Length must be between min and max")
-            console.log(response)
 
-        })
-    });
     it('Negative: value + 1 category C24', () => {
         let dataSet = getPetRequestData(PET_LIMIT, true)
         dataSet.category = PET_LIMIT.category.max + 1
@@ -94,7 +124,7 @@ describe('Tests for Create Pet endpoint', () => {
             console.log(response)
 
         })
-    });
+    });*/
 
     it('Positive: Only required fields (name and photoUrl) C4', () => {
         let requestData = getPetRequestData(DATA_OPTIONS.AVERAGE, true)
