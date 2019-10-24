@@ -73,58 +73,7 @@ describe('Tests for Create Pet endpoint', () => {
             expect(response.messages[0].fieldError).to.eq(`Length must be between ${PET_LIMIT.tags.name.min} and ${PET_LIMIT.tags.name.max}`);
         })
     });
-   /* it('Negative: value + 1 name C23', () => {
-        let dataSet = getPetRequestData(PET_LIMIT, true)
-        dataSet.name = Chance().string({length:PET_LIMIT.name.max + 1})
-        createPet(dataSet, false).then(response => {
-            expect(response.status).to.eq(400)
-            expect(response.body.message).to.eq("Length must be between min and max")
-            console.log(response)
-
-        })
-    });
-
-    it('Negative: value + 1 category C24', () => {
-        let dataSet = getPetRequestData(PET_LIMIT, true)
-        dataSet.category = PET_LIMIT.category.max + 1
-        createPet(dataSet, false).then(response => {
-            expect(response.status).to.eq(400)
-            expect(response.body.message).to.eq("Length must be between min and max")
-            console.log(response)
-
-        })
-    });
-    it('Negative: value + 1 photoUrls C25', () => {
-        let dataSet = getPetRequestData(PET_LIMIT, true)
-        dataSet.photoUrls = PET_LIMIT.photoUrls.max + 1
-        createPet(dataSet, false).then(response => {
-            expect(response.status).to.eq(400)
-            expect(response.body.message).to.eq("Length must be between min and max")
-            console.log(response)
-
-        })
-    });
-
-    it('Negative: value + 1 status', () => {
-        let dataSet = getPetRequestData(PET_LIMIT, true)
-        dataSet.status = PET_LIMIT.status.max + 1
-        createPet(dataSet, false).then(response => {
-            expect(response.status).to.eq(400)
-            expect(response.body.message).to.eq("Length must be between min and max")
-            console.log(response)
-
-        })
-    });
-    it('Negative: value + 1 tags C26', () => {
-        let dataSet = getPetRequestData(PET_LIMIT, true)
-        dataSet.tags = PET_LIMIT.tags.max + 1
-        createPet(dataSet, false).then(response => {
-            expect(response.status).to.eq(400)
-            expect(response.message).to.eq("Length must be between min and max")
-            console.log(response)
-
-        })
-    });*/
+   
 
     it('Positive: Only required fields (name and photoUrl) C4', () => {
         let requestData = getPetRequestData(DATA_OPTIONS.AVERAGE, true)
