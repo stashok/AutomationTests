@@ -4,6 +4,7 @@
   "projectId": "vqn4nq",
   "defaultCommandTimeout": 10000,
   "env": {
+    "googleURL": "https://store.google.com/us",
     "iherbURL": "https://www.iherb.com",
     "petStoreApiUrl": "https://petstore.swagger.io/v2"
   },

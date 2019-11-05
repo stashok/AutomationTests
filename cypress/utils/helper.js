@@ -35,9 +35,9 @@ export const difference = (setA, setB) => {
 }
 
 export const printPlanets = (array) => {
-    let _array = new Array(array);
-    for (let i = 0; i < _array.length ; i++) {
-        cy.log(_array[i]);
-    }
+
+    array.forEach(function (element) {
+        console.log(element)
+    })
 
 }
