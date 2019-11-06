@@ -1,5 +1,5 @@
 import Chance from 'chance'
-import functionRandom from "../../../page-objects/functionRandom";
+import functionRandom from "../../../utils/functionRandom";
 import {createPet, deletePet, getPetById, updatePet} from "../../../service/petService"
 import {DATA_OPTIONS, getPetRequestData} from "../../../utils/requestsDataGenerator";
 import {API_URL} from "../../../service/apiSettings";
@@ -73,7 +73,7 @@ describe('Tests for Create Pet endpoint', () => {
             expect(response.messages[0].fieldError).to.eq(`Length must be between ${PET_LIMIT.tags.name.min} and ${PET_LIMIT.tags.name.max}`);
         })
     });
-   
+
 
     it('Positive: Only required fields (name and photoUrl) C4', () => {
         let requestData = getPetRequestData(DATA_OPTIONS.AVERAGE, true)
@@ -109,7 +109,7 @@ describe('Tests for Create Pet endpoint', () => {
         requestData.status = 1
         createPet(requestData, false).then(response => {
             expect(response.status).to.eq(400);
-            expect(response.message).to.eq('Invalid pet status value');
+            expect(response.body.message).to.eq('Invalid pet status value');
         })
     });
     it('Negative: Invalid tag name (numeric instead of valid string value) C18', () => {
@@ -126,6 +126,7 @@ describe('Tests for Create Pet endpoint', () => {
         createPet(requestData, false).then(response => {
             expect(response.status).to.eq(400);
             expect(response.body.message).to.eq('Invalid pet id status value');
+            console.log(response);
         })
     });
     it('Negative: Invalid tag id (string valid instead of numeric value) C20', () => {
@@ -143,6 +144,6 @@ describe('Tests for Create Pet endpoint', () => {
             expect(response.status).to.eq(400);
             expect(response.statusText).to.eq('Bad Request');
         })
-    })
+    });
 });
 

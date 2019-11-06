@@ -9,13 +9,11 @@ describe('Tests for Google', () => {
         }).its("body").as("Titles")
     })
     it(("log positions"), function () {
-        cy.get('@Titles').then(titleList => {
-            titleList.products.forEach(elem => {
-                console.log(elem.display_name)
-            })
+        this.Titles.products.forEach(elem => {
+            console.log(elem.display_name)
+            }
 
-
-        })
+        )
     })
 
 });
