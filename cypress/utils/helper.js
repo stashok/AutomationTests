@@ -41,3 +41,10 @@ export const printPlanets = (array) => {
     })
 
 }
+
+export const printPlanet = (map) => {
+    array.forEach(item => cy.log(JSON.stringify(item)));
+    map.forEach((value, key) => {
+        cy.log(key + ': ' + Object.keys(value).map(objKey => objKey + ':' + value[objKey]).join(', '))
+    });
+}
